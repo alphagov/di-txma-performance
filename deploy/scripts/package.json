@@ -1,8 +1,8 @@
 {
-  "name": "scripts",
+  "name": "di-txma-performance",
   "version": "1.0.0",
   "repository": "git@github.com:alphagov/di-devplatform-performance.git",
-  "description": "Dev Platform Performance Test k6 Repo",
+  "description": "TxMA Performance Test k6 Repo",
   "main": "index.js",
   "devDependencies": {
     "@types/k6": "^0.41.0",
@@ -24,7 +24,5 @@
     "pretest": "node build.js",
     "test": "k6 run dist/unit-tests.js"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT"
 }
