@@ -214,7 +214,6 @@ Resources:
         Type: "NO_SOURCE"
         BuildSpec: !Sub |
           version: 0.2
-
           env:
             variables:
               WORK_DIR: /home/k6/scripts
@@ -224,14 +223,15 @@ Resources:
               SCENARIO: all
               K6_DYNATRACE_DASHBOARD_ID: 1e845440-d013-4472-9d65-2ea21a5cb41a
             parameter-store:
-        # GRAFANA_API_KEY: "/perfTest/grafana_api_key"
+              K6_DYNATRACE_URL: "/perfTest/dynatraceUrl"
+              K6_DYNATRACE_APITOKEN: "/perfTest/dynatraceApiToken"
 
           phases:
             pre_build:
               commands:
                 - mkdir -p "$TEST_REPORT_DIR"
-                # - sed -e "s#{URL}#$K6_DYNATRACE_URL#" -e "s#{APITOKEN}#$K6_DYNATRACE_APITOKEN#" -e "s#{ID}#$CODEBUILD_BUILD_ID#" $OTEL_TEMPLATE > $OTEL_CONFIG
-                # - /otel/otelcol-contrib  --config=$OTEL_CONFIG > otel.log 2>&1 &
+                - sed -e "s#{URL}#$K6_DYNATRACE_URL#" -e "s#{APITOKEN}#$K6_DYNATRACE_APITOKEN#" -e "s#{ID}#$CODEBUILD_BUILD_ID#" $OTEL_TEMPLATE > $OTEL_CONFIG
+                - /otel/otelcol-contrib  --config=$OTEL_CONFIG > otel.log 2>&1 &
             build:
               commands:
                 - start=`date +"%Y-%m-%dT%H:%M:%SZ"`
@@ -244,10 +244,8 @@ Resources:
                 - while kill -0 $OTEL_PID; do sleep 1; done
                 - cat otel.log
                 - end=`date +"%Y-%m-%dT%H:%M:%SZ"`
-                # - |
-                #   echo "Dashboard link: /#dashboard;gtf="$start"%20to%20"$end";id="$K6_DYNATRACE_DASHBOARD_ID";gf=all;es=CUSTOM_DIMENSION-build_id:"$CODEBUILD_BUILD_ID
+                - echo "Dashboard link: /#dashboard;gtf="$start"%20to%20"$end";id="$K6_DYNATRACE_DASHBOARD_ID";gf=all;es=CUSTOM_DIMENSION-build_id:"$CODEBUILD_BUILD_ID
                 - echo Performance test complete
-
       Tags:
         - Key: "Name"
           Value: !Join
