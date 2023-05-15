@@ -1,9 +1,9 @@
 {
-  "name": "scripts",
+  "name": "di-txma-performance",
+  "description": "TxMA Performance Test k6 Repo",
   "version": "1.0.0",
-  "repository": "git@github.com:alphagov/di-devplatform-performance.git",
-  "description": "Dev Platform Performance Test k6 Repo",
-  "main": "index.js",
+  "repository": "git@github.com:alphagov/di-txma-performance.git",
+  "license": "MIT",
   "devDependencies": {
     "@types/k6": "^0.41.0",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
@@ -20,11 +20,9 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "start": "node build.js",
+    "lint": "eslint ./src --fix",
     "pretest": "node build.js",
+    "start": "node build.js",
     "test": "k6 run dist/unit-tests.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT"
+  }
 }

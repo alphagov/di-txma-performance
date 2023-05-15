@@ -13,22 +13,17 @@ jobs:
   k6_unit_test:
     name: Run linting and unit tests
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-
       - name: Install dependencies
         run: npm i
-          
       - name: Run linting checks
         run: npx eslint .
-
       - name: Transpile TypeScript test scripts
         run: node ./build.js
-
       - name: Run local k6 unit test script
         uses: grafana/k6-action@v0.2.0
         with:
