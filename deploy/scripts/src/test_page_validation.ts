@@ -10,7 +10,7 @@ export const options: Options = {
   }
 }
 
-sleep(1);
+sleep(1)
 
 const checkRes = check(res, {
   'status is 200': (r) => r.status === 200,
