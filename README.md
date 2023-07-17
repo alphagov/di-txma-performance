@@ -2,6 +2,8 @@
 
 # Performance Testing Framework
 
+**Archived: Performance testing has now been centralised under - https://github.com/alphagov/di-devplatform-performance**
+
 The following is an example performance test framework.
 
 ## Getting Started
